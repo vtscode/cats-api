@@ -9,7 +9,6 @@ import {
   Row,
   Divider,
   message,
-  Carousel,
 } from "antd";
 import VirtualList from "rc-virtual-list";
 import { useEffect, useState } from "react";
@@ -186,7 +185,6 @@ function App() {
                       xs: 1,
                     }}
                   >
-                    <Carousel autoplay>{}</Carousel>
                     <Descriptions.Item label="Life Span">
                       {item.life_span}
                     </Descriptions.Item>
