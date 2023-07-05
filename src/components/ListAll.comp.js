@@ -1,9 +1,9 @@
 import { Avatar, List, message } from "antd";
 import VirtualList from "rc-virtual-list";
 import { useEffect, useState } from "react";
+import { Collapse } from "antd";
 
-const fakeDataUrl = "https://api.thecatapi.com/v1/breeds";
-const ContainerHeight = 400;
+const fakeDataUrl = "https://api.thecatapi.com/v1/breeds?limit=10";
 
 const ListAllCats = () => {
   const [data, setData] = useState([]);
@@ -11,6 +11,7 @@ const ListAllCats = () => {
     fetch(fakeDataUrl)
       .then((res) => res.json())
       .then((body) => {
+        console.log(body);
         setData(data.concat(body));
         message.success(`${body.length} more items loaded!`);
       });
