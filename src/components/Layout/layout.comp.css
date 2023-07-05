@@ -1,0 +1,16 @@
+.layout__container {
+  min-height: 100vh;
+}
+.layout__header {
+  padding: 0;
+}
+.layout__header--btn {
+  font-size: "16px";
+  width: 64px;
+  height: 64px;
+}
+.layout__content {
+  margin: 24px 16px;
+  padding: 24px;
+  min-height: 280px;
+}

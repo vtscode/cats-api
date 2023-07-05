@@ -38,4 +38,4 @@ const getBreedImage = async (id, limit = 8) => {
     throw Error(err);
   }
 };
-export { getBreeds, getBreedDetails };
+export { getBreeds, getBreedDetails, getBreedImage };

@@ -3,10 +3,10 @@ import {
   MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
+import "./layout.comp.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -17,7 +17,7 @@ const LayoutComp = (props) => {
   } = theme.useToken();
 
   return (
-    <Layout>
+    <Layout className="layout__container">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
@@ -40,27 +40,21 @@ const LayoutComp = (props) => {
       </Sider>
       <Layout>
         <Header
+          className="layout__header"
           style={{
-            padding: 0,
             background: colorBgContainer,
           }}
         >
           <Button
             type="text"
+            className="layout__header--btn"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
           />
         </Header>
         <Content
+          className="layout__content"
           style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
             background: colorBgContainer,
           }}
         >

@@ -1,2 +1,2 @@
-import ListAllComp from "./ListAll.comp";
-export { ListAllComp };
+import LayoutComp from "./Layout/Layouts.comp";
+export { LayoutComp };
