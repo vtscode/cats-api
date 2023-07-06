@@ -25,9 +25,12 @@ const ContainerHeight = 500;
 function App() {
   const [loading, setloading] = useState(false);
   const [data, setdata] = useState([]);
+  const [filterData, setfilterData] = useState([]);
   const [page, setpage] = useState(0);
-  const [detailBreed, setdetailBreed] = useState([]);
+  const [detailBreed, setdetailBreed] = useState({});
   const [expandedId, setexpandedId] = useState([]);
+  const [search, setsearch] = useState("");
+  const [arrSearch, setarrSearch] = useState([]);
 
   const appendData = async () => {
     setloading(true);
@@ -36,6 +39,8 @@ function App() {
       // console.log(dt);
       // console.log(page);
       if (dt && dt.length > 0) {
+        const arr = dt.map((x) => ({ label: x.name, value: x.id }));
+        setarrSearch(arrSearch.concat(arr));
         setpage(page + 1);
         setdata(data.concat(dt));
         setloading(false);
@@ -48,7 +53,6 @@ function App() {
     }
   };
   const detailsData = async (item) => {
-    console.log(item);
     try {
       // check data
       const indxbreed = expandedId.indexOf(item.id);
@@ -58,16 +62,16 @@ function App() {
       } else {
         setexpandedId(expandedId.concat(item.id));
       }
-      const findBreed = detailBreed.findIndex((x) => x.id === item.id);
-      if (findBreed === -1) {
+      const findBreed = detailBreed[item.id];
+      if (!Boolean(findBreed)) {
         const dt = await getBreedImage(item.id);
         if (dt && dt.length > 0) {
           // set new data and store it in array
           const data = {
-            id: item.id,
-            images: dt,
+            [item.id]: dt,
           };
-          setdetailBreed(detailBreed.concat(data));
+
+          setdetailBreed((prev) => ({ ...prev, ...data }));
         }
       }
     } catch (err) {
@@ -89,6 +93,12 @@ function App() {
     }
   };
 
+  const onSelectedSearch = (value) => {
+    setsearch(value);
+    const filtersearch = data.filter((x) => x.id === value);
+    setfilterData(filtersearch);
+  };
+
   return (
     <LayoutComp>
       <Row justify="space-between" align="middle">
@@ -96,15 +106,19 @@ function App() {
           <Typography.Title level={2}>Cats List</Typography.Title>
         </Col>
         <Col>
-          <SearchCat />
+          <SearchCat
+            arrSearch={arrSearch}
+            onSelectedSearch={onSelectedSearch}
+          />
         </Col>
       </Row>
       <VirtualList
-        data={data}
+        data={search ? filterData : data}
         height={ContainerHeight}
         itemHeight={47}
         itemKey="id"
         onScroll={onScroll}
+        onLoad={() => <SkeletonComp loading={true} />}
       >
         {(item) => (
           <div key={item.id}>
@@ -135,6 +149,8 @@ function App() {
                 {expandedId.length > 0 &&
                   expandedId.find((x) => x === item.id) && (
                     <div>
+                      <CarouselComp detailBreed={detailBreed[item.id]} />
+
                       {/* data */}
                       <Descriptions
                         title="Detail Cats"
@@ -148,7 +164,6 @@ function App() {
                           xs: 1,
                         }}
                       >
-                        <CarouselComp />
                         <Descriptions.Item label="Life Span">
                           {item.life_span}
                         </Descriptions.Item>
