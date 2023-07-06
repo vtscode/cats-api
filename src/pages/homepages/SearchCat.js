@@ -1,15 +1,9 @@
 import { Select } from "antd";
-
-const onSearch = (value) => {
-  console.log("search:", value);
-  if (value === "") {
-  }
-};
-const SearchCat = ({ arrSearch, onSelectedSearch }) => (
+const SearchCat = ({ arrSearch, onSearch, onSelectedSearch }) => (
   <Select
     showSearch
     allowClear
-    placeholder="Select a person"
+    placeholder="Search or select a cat"
     optionFilterProp="children"
     onChange={onSelectedSearch}
     onSearch={onSearch}

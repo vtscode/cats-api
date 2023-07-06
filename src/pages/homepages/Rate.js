@@ -1,5 +1,6 @@
 import { Row } from "antd";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
+import { memo } from "react";
 
 const Rate = ({ rating }) => {
   let rt = parseInt(rating);
@@ -45,4 +46,4 @@ const Rate = ({ rating }) => {
   );
 };
 
-export default Rate;
+export default memo(Rate);

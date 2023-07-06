@@ -11,7 +11,7 @@ import "./layout.comp.css";
 const { Header, Sider, Content } = Layout;
 
 const LayoutComp = (props) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer },
   } = theme.useToken();

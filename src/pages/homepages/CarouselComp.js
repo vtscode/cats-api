@@ -6,7 +6,14 @@ const CarouselComp = ({ detailBreed }) => {
     <Carousel autoplay style={{ textAlign: "center" }}>
       {imgs.map((x, idx) => (
         <div key={x.id}>
-          <Image width={300} height={300} src={x.url} />
+          <Image
+            width={300}
+            height={300}
+            src={x.url}
+            style={{
+              borderRadius: 10,
+            }}
+          />
         </div>
       ))}
     </Carousel>
